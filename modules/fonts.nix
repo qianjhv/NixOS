@@ -10,16 +10,18 @@
     source-han-serif
     source-han-mono
     inter
-
-    #
     sarasa-gothic
     lxgw-wenkai
+
+    #
     maple-mono.NF-CN
     nerd-fonts.fira-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.mononoki
     nerd-fonts.roboto-mono
     nerd-fonts.iosevka
+    vista-fonts
+    nerd-fonts.monaspace
   ];
 
   fonts.fontconfig = {

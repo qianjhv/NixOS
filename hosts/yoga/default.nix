@@ -2,6 +2,9 @@
 {
   imports = [  ./hardware-configuration.nix ];
 
+  time.timeZone = "Asia/Shanghai";
+
+  # services.dnsmasq 可了解方案：本地 DNS 缓存 + 上游 DNS
   networking.hostName = "yoga";
   networking.networkmanager = {
     enable = true;
@@ -10,6 +13,7 @@
   networking.nameservers = ["223.5.5.5" "1.1.1.1" ];
   services.resolved.enable = false;
 
+  # add users
   programs.zsh.enable = true;
   users.users.jeff = {
     isNormalUser = true;
@@ -21,33 +25,17 @@
     ];
   };
 
-  myModules.kanata.enable = true;
+  programs.xwayland.enable = true;
   services.gvfs.enable = true;
   services.upower.enable = true;
-
-
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      waylandFrontend = true;
-      addons = with pkgs; [
-        fcitx5-gtk              # GTK 应用输入法支持
-        (fcitx5-rime.override {
-          rimeDataPkgs = [
-            rime-ice
-          ];
-        })
-      ];
-    };
-  };
+  myModules.kanata.enable = true;
 
   environment.sessionVariables = {
     XMODIFIERS = "@im=fcitx";
-    GTK_IM_MODULE = "fcitx";
+    # GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "fcitx";
     SDL_IM_MODULE = "fcitx";
-    GLFW_IM_MODULE = "ibus";  # 注意：GLFW 官方文档里这个变量吃的是 "ibus"，不是应用名，是协议名，fcitx 通过 ibus 兼容层生效，写 "fcitx" 大概率不识别
     INPUT_METHOD = "fcitx";
 
     # XDG_DATA_DIRS = [
@@ -55,7 +43,6 @@
     #   "${pkgs.adwaita-icon-theme}/share"
     # ];
   };
-
 
   system.stateVersion = "26.05";
   

@@ -5,13 +5,13 @@ in
 {
   # sops 基础配置
   sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.age.keyFile = "/home/jeff/.config/sops/age/keys.txt";
+  # sops.age.keyFile = "/home/jeff/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/etc/sops/age/keys.txt";
 
   sops.secrets.dae_subscription_url = { };
+  sops.secrets.lmq_sub_url = {};
   sops.secrets.TW01 = { };
   sops.secrets.TW02 = { };
-  sops.secrets.XG01 = { };
-  sops.secrets.XG02 = { };
   sops.secrets.XJP01 = { };
 
   sops.templates."dae.conf".content = ''
@@ -28,6 +28,7 @@ in
     }
     subscription {
       my_sub: '${config.sops.placeholder.dae_subscription_url}'
+      lmq_sub: '${config.sops.placeholder.lmq_sub_url}'
     }
     dns {
       upstream {
@@ -49,15 +50,14 @@ in
     node {
       TW01: '${config.sops.placeholder.TW01}'
       TW02: '${config.sops.placeholder.TW02}'
-      XG01: '${config.sops.placeholder.XG01}'
-      # XG02: '${config.sops.placeholder.XG02}'
       XJG01: '${config.sops.placeholder.XJP01}'
     }
     group {
       proxy {
-        filter: name(TW01) [add_latency: -500ms]
-        filter: name(TW02) [add_latency: -400ms]
-        filter: name(XG01)
+        # filter: name(TW01) [add_latency: -500ms]
+        filter: subtag(lmq_sub) && name(keyword: '新加坡')
+        filter: name(TW01)
+        filter: name(TW02)
         filter: name(XJP01)
         policy: min_moving_avg
       }

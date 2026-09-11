@@ -48,6 +48,7 @@
     git
     curl
     wget
+    gcc
 
     # --- 命令行核心工具 ---
     zsh
@@ -62,6 +63,7 @@
     zip
 
     # --- 系统诊断 ---
+    man-pages
     btop
     lsof
     pciutils     # lspci
@@ -81,5 +83,8 @@
     # --- 编辑器 fallback ---
     vim
     helix
+
+    #
+    xwayland-satellite
   ];
 }

@@ -14,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";  # 确保 home-manager 用同一份 nixpkgs，避免版本冲突
     };
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
