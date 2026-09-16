@@ -1,5 +1,5 @@
 # home/default.nix
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 {
   # imports = [
   #   inputs.noctalia.homeModules.default
@@ -42,6 +42,23 @@
     # libnotify # Nemo 的文件操作（复制、移动）需要一个通知服务来显示进度条。
     nautilus
     # adwaita-icon-theme
+
+    # lsp
+    tree-sitter
+    clang-tools
+    lldb
+    rust-analyzer
+    nixd
+    lua-language-server
+    marksman
+    bash-language-server
+    taplo
+    jdt-language-server
+
+    #
+    cargo
+    rustc
+
   ];
 
   # programs.noctalia = {

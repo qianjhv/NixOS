@@ -6,6 +6,7 @@
     ./foot.nix
     ./zsh.nix
     ./starship.nix
+    ./helix.nix
   ];
 
   home.username = "jeff";
@@ -14,6 +15,7 @@
 
   home.packages = with pkgs; [
     tukai
+    tsukimi
   ];
 
   home.sessionVariables = {

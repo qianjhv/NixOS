@@ -86,5 +86,10 @@
 
     #
     xwayland-satellite
+
+    #
+    ffmpeg
+    mpv
+    vlc
   ];
 }
