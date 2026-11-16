@@ -6,6 +6,7 @@
     ./noctalia-greeter.nix
     ./fonts.nix
     ./niri.nix
+    # ./umbriel.nix
     ./clash-verge-rev.nix
     ./dae.nix
     ./kanata.nix
