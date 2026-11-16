@@ -14,10 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";  # 确保 home-manager 用同一份 nixpkgs，避免版本冲突
     };
 
-    # noctalia = {
-    #   url = "github:noctalia-dev/noctalia";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    umbriel = {
+      url = "github:noctalia-dev/umbriel";
+    };
 
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
@@ -39,10 +38,22 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
+    system = "x86_64-linux";
+
+    pkgs = import nixpkgs {
+      inherit system;
+    };
+
     mkHost = hostname: extraModules:
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        inherit system;
+
+        specialArgs = {
+          inherit inputs;
+          honk = self.packages.${system}.honk;
+          bbdown = self.packages.${system}.bbdown;
+        };
+
         modules = [
           ./hosts/${hostname}
           ./modules
@@ -52,15 +63,23 @@
 
           home-manager.nixosModules.home-manager
           {
-            # ✅ 这些必须在这里
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.jeff = import ./home/jeff;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = { 
+              inherit inputs; 
+              inherit (self.packages.${system}) honk bbdown;
+            };
           }
         ] ++ extraModules;
       };
-  in {
+  in
+  {
+    packages.${system} = {
+      bbdown = pkgs.callPackage ./packages/bbdown.nix {};
+      honk = pkgs.callPackage ./packages/honk.nix {};
+    };
+
     nixosConfigurations = {
       yoga = mkHost "yoga" [];
     };

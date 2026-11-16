@@ -8,7 +8,8 @@
     ./niri.nix
     # ./umbriel.nix
     ./clash-verge-rev.nix
-    ./dae.nix
+    # ./dae.nix
+    ./honk.nix
     ./kanata.nix
   ];
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
@@ -10,9 +10,6 @@ in
 
   sops.secrets.dae_subscription_url = { };
   sops.secrets.lmq_sub_url = {};
-  sops.secrets.TW01 = { };
-  sops.secrets.TW02 = { };
-  sops.secrets.XJP01 = { };
 
   sops.templates."dae.conf".content = ''
     global {
@@ -48,17 +45,10 @@ in
       }
     }
     node {
-      TW01: '${config.sops.placeholder.TW01}'
-      TW02: '${config.sops.placeholder.TW02}'
-      XJG01: '${config.sops.placeholder.XJP01}'
     }
     group {
       proxy {
-        # filter: name(TW01) [add_latency: -500ms]
         filter: subtag(lmq_sub) && name(keyword: '新加坡')
-        filter: name(TW01)
-        filter: name(TW02)
-        filter: name(XJP01)
         policy: min_moving_avg
       }
     }

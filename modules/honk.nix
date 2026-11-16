@@ -1,18 +1,14 @@
-
+# modules/honk.nix
 { config, honk, ... }:
 
 {
   # SOPS 基础配置
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.age.keyFile = "/etc/sops/age/keys.txt";
 
   # 敏感信息
   sops.secrets.dae_subscription_url = {};
   sops.secrets.lmq_sub_url = {};
-
-  sops.secrets.TW01 = {};
-  sops.secrets.TW02 = {};
-  sops.secrets.XJP01 = {};
 
   # honk 配置
   sops.templates."honk.dae" = {
@@ -73,9 +69,6 @@
       }
 
       node {
-        TW01: '${config.sops.placeholder.TW01}'
-        TW02: '${config.sops.placeholder.TW02}'
-        XJG01: '${config.sops.placeholder.XJP01}'
       }
 
       group {
@@ -108,7 +101,7 @@
   };
 
   # honk systemd 服务
-  systemd.services.honk-core = {
+  systemd.services.honk = {
     description = "honk transparent proxy engine";
 
     wantedBy = [ "multi-user.target" ];
@@ -124,12 +117,12 @@
       StateDirectoryMode = "0700";
 
       ExecStart = ''
-        ${honk}/bin/honk-core \
+        ${honk}/bin/honk \
           --config ${config.sops.templates."honk.dae".path} \
           --disable-timestamp
       '';
 
-      ExecReload = "${honk}/bin/honk-core reload";
+      ExecReload = "${honk}/bin/honk reload";
 
       Restart = "on-failure";
       RestartSec = "2s";

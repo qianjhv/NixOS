@@ -1,24 +1,32 @@
 { pkgs }:
 
 let
-  version = "0.1.0-beta.3";
+  version = "0.1.0-beta.6";
 in
 pkgs.stdenvNoCC.mkDerivation {
-  pname = "honk-core";
+  pname = "honk";
   inherit version;
 
   src = pkgs.fetchurl {
     url = "https://github.com/daeuniverse/honk/releases/download/v${version}/honk-core-v${version}-x86_64-unknown-linux-gnu-stock-full.tar.gz";
-    hash = "sha256:b1e9c27c31a89d539556bf8cac092bcc47bf6a7da56d83d66fc1d0873bc58505";
+    hash = "sha256:d3ef30b52015e0b741fc7e442067f76f27d535923e3faef0f98ea3c70acf0581";
   };
+
+  nativeBuildInputs = [
+    pkgs.autoPatchelfHook
+  ];
+
+  buildInputs = [
+    pkgs.stdenv.cc.cc.lib
+  ];
 
   dontConfigure = true;
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p "$out/bin"
-    tar -xzf "$src" --strip-components=1 -C "$TMPDIR"
-    install -m755 "$TMPDIR/honk-core" "$out/bin/honk-core"
+    runHook preInstall
+    install -Dm755 honk-core "$out/bin/honk"
+    runHook postInstall
   '';
 
   meta = {

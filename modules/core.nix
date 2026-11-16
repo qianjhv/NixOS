@@ -1,5 +1,5 @@
 # modules/core.nix
-{ pkgs, ... }:
+{ pkgs, honk, ... }:
 {
   ####################
   # Boot / bootloader
@@ -91,5 +91,8 @@
     ffmpeg
     mpv
     vlc
+
+    # 
+    honk
   ];
 }

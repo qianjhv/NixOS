@@ -1,5 +1,5 @@
 # home/default.nix
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, bbdown, ... }:
 {
   # imports = [
   #   inputs.noctalia.homeModules.default
@@ -58,6 +58,10 @@
     #
     cargo
     rustc
+
+
+    # 
+    bbdown
 
   ];
 
