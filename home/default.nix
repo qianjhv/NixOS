@@ -65,12 +65,6 @@
 
   ];
 
-  # programs.noctalia = {
-  #   enable = true;
-  #   package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  #   settings = {};
-  # };
-
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
