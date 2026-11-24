@@ -3,9 +3,10 @@
 {
   imports = [
     ../default.nix    # 几乎每个用户都需要的用户配置
-    # ./umbriel.nix
+    ./umbriel.nix
     ./foot.nix
     ./zsh.nix
+    ./luciole.nix
     ./starship.nix
     ./helix.nix
   ];

@@ -5,8 +5,8 @@
     ./core.nix
     ./noctalia-greeter.nix
     ./fonts.nix
-    ./niri.nix
-    # ./umbriel.nix
+    ./umbriel.nix
+    # ./niri.nix
     ./clash-verge-rev.nix
     # ./dae.nix
     ./honk.nix

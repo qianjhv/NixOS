@@ -40,7 +40,7 @@
     # nemo
     # nemo-fileroller
     # libnotify # Nemo 的文件操作（复制、移动）需要一个通知服务来显示进度条。
-    nautilus
+    # nautilus
     # adwaita-icon-theme
 
     # lsp
@@ -58,6 +58,10 @@
     #
     cargo
     rustc
+
+    # 
+    blender
+    godot
 
 
     # 

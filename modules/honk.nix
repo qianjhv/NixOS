@@ -97,6 +97,16 @@
 
         fallback: proxy
       }
+
+      experimental {
+        native_api {
+          enabled: true
+          listen: '127.0.0.1:9527'
+          password_auth: true
+          config_write: true
+          ui: 'embedded'
+        }
+      }
     '';
   };
 
