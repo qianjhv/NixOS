@@ -1,5 +1,5 @@
 # home/jeff/default.nix
-{ pkgs, config, flakes, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ../default.nix    # 几乎每个用户都需要的用户配置

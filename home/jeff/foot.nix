@@ -5,8 +5,8 @@
 
     settings = {
       main = {
-        font = "Maple Mono NF CN:size=10";
-        # font = "JetBrainsMono Nerd Font:size=10";
+        # font = "Maple Mono NF CN:size=10";
+        font = "JetBrainsMono Nerd Font:size=10";
         pad = "4x4";
       };
 
